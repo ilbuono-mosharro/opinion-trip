@@ -1,0 +1,94 @@
+{% extends 'dashboard/base_registration.html' %}
+{% load static %}
+{% block title %}sign_up{% endblock %}
+{% block description %}sign_up{% endblock %}
+{% block keywords %}sign_up{% endblock %}
+{% block ogtitle %}sign_up{% endblock %}
+{% block ogdescription %}sign_up{% endblock %}
+{% block content %}
+    <div class="mb-4">
+        <a href="{% url 'pages:home' %}">
+            <img src="{% static 'img/logo.svg' %}" class="mb-2" alt="" width="150" height="150">
+        </a>
+    </div>
+    <!-- Form -->
+    <form method="post" action="{% url 'registration:sign_up' %}" autocomplete="off">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            {{ form.username }}
+            {{ form.username.label_tag }}
+            {{ form.username.help_text }}
+            {{ form.username.errors }}
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    {{ form.first_name }}
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name.errors }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    {{ form.last_name }}
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.email }}
+            {{ form.email.label_tag }}
+            {{ form.email.errors }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.password1 }}
+            {{ form.password1.label_tag }}
+            {{ form.password1.help_text }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.password2 }}
+            {{ form.password2.label_tag }}
+            {{ form.password2.help_text }}
+            {{ form.password2.errors }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.age }}
+            {{ form.age.label_tag }}
+            {{ form.age.errors }}
+        </div>
+        <div class="form-floating mb-3">
+            <!-- Checkbox -->
+            <div class="mb-3">
+                <div class="form-check custom-checkbox">
+                    {{ form.terms_and_privacy }}
+                    <label class="form-check-label" for="agreeCheck">
+                        <span class="fs-5">I agree to the
+                            <a href="{% url 'pages:terms' %}">Terms of Service </a>and
+                            <a href="{% url 'pages:privacy' %}">Privacy Policy.</a>
+                        </span>
+                    </label>
+                    {{ form.terms_and_privacy.errors }}
+                </div>
+            </div>
+            <div>
+            </div>
+            <!-- Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                    Create Free Account
+                </button>
+            </div>
+            <div class="d-md-flex justify-content-between mt-4">
+                <div class="mb-2 mb-md-0">
+                    <a href="{% url 'login' %}" class="fs-5">Already member? Login </a>
+                </div>
+                <div>
+                    <a href="{% url 'password_reset' %}" class="text-inherit fs-5">
+                        Forgot your password?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

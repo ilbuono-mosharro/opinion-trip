@@ -1,0 +1,32 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger {% if section != "profile" %}btn-sm{% endif %}" data-bs-toggle="modal"
+        data-bs-target="#exampleModal-{{ modalid }}"><i class="bi bi-trash"></i> {{ button }}
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-{{ modalid }}" tabindex="-1" aria-labelledby="exampleModalLabel-{{ modalid }}"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel-{{ modalid }}">
+                    {{ title }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ body }}
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ url }}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">
+                        Yes
+                    </button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

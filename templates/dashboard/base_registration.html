@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'dashboard/partials/head.html' %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body class="bg-rose">
+<!-- container -->
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center g-0
+        min-vh-100">
+        <div class="col-12 col-md-8 {% if section == "sign_up" %}col-lg-8 col-xxl-7{% else %}col-lg-5 col-xxl-4{% endif %} py-8 py-xl-0">
+            <!-- Card -->
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-6 text-center">
+                    {% include 'partial/messagges.html' %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Scripts -->
+{% include 'dashboard/partials/scripts.html' %}
+</body>
+
+</html>

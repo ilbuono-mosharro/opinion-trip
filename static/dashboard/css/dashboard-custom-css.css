@@ -1,0 +1,40 @@
+.bg-rose {
+    background: #f50057;
+}
+
+.m-e-2 {
+    margin-right: -0.2rem !important;
+}
+
+.color-green {
+    color: #00aa6c;
+}
+
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 4px;
+}
+
+.rate {
+    color: #00aa6c !important;
+    direction: rtl;
+    display: inline-block;
+}
+
+.rate input[type=radio] {
+    display: none
+}
+
+.rate label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.rate:hover, .rate label:hover ~ label, .rate input[type=radio]:checked ~ label {
+    color: #00aa6c;
+}

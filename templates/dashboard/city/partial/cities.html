@@ -1,0 +1,98 @@
+<div class="card">
+    <!-- card header  -->
+    <div class="card-header bg-white  py-4">
+        <h4 class="mb-0">Cities</h4>
+    </div>
+    {% if cities %}
+        <!-- table  -->
+        <div class="table-responsive">
+            <table class="table text-nowrap mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for city in cities %}
+                    <tr>
+                        <td class="align-middle">
+                            <div class="d-flex
+                            align-items-center">
+                                <div>
+                                    <div class="icon-shape icon-md border p-4 rounded-1">
+                                        {% if city.copertina %}
+                                            <img src="{{ city.copertina.url }}" alt="" width="40" height="40">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="ms-3 lh-1">
+                                    <h5 class=" mb-1">
+                                        <a href="#" class="text-inherit">{{ city.name }}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">{{ city.title }}</td>
+                        <td class="align-middle">
+                            {% if city.is_active == True %}
+                                <span class="badge bg-success">Publish</span>
+                            {% else %}
+                                <span class="badge bg-danger">Unpublish</span>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            {{ city.created_at|date:"D d M Y" }}
+                        </td>
+                        <td class="align-middle text-dark">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item">
+                                    <form method="post" action="{% url 'cities:staff_city_status' city.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="btn btn-{% if city.is_active is False %}success{% else %}danger{% endif %} btn-sm">
+                                            {% if city.is_active is False %}
+                                                <i class="bi bi-check2"></i>
+                                            {% else %}
+                                                <i class="bi bi-x"></i>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="{% url 'cities:add_image_city' city.id %}" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-images"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="{% url 'cities:modify_city' city.id %}" class="btn btn-info btn-sm">
+                                        <i class="bi bi-arrow-clockwise"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    {% url 'cities:delete_city' city.id as delete_city %}
+                                    {% include 'dashboard/partials/delete_modal.html' with title="Are you sure you want to delete this object?" body="A deleted object cannot be recovered" url=delete_city modalid=city.id %}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- card footer  -->
+        {% if section == "dashboard" %}
+            <div class="card-footer bg-white text-center">
+                <a href="{% url 'pages:cities_dashboard' %}" class="link-primary">View All Cities</a>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="card-footer bg-white text-center">
+            <h3>Your table is currently empty.</h3>
+            {% if section == "dashboard" %}
+                <a href="{% url 'cities:add_city' %}" class="btn btn-primary">Add city</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

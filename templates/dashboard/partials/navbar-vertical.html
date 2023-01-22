@@ -1,0 +1,83 @@
+{% load static %}
+<!-- Sidebar -->
+<nav class="navbar-vertical navbar">
+    <div class="nav-scroller">
+        <!-- Brand logo -->
+        <a class="navbar-brand text-white" href="{% url 'pages:dashboard' %}">
+            <img src="{% static 'img/logo.svg' %}" alt=""/> Opinion
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+            <li class="nav-item">
+                <a class="nav-link has-arrow" href="{% url 'pages:home' %}">
+                    <i class="bi bi-browser-edge nav-icon icon-xs me-2"></i> View Website
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link has-arrow" href="{% url 'pages:dashboard' %}">
+                    <i class="bi bi-house nav-icon icon-xs me-2"></i> Dashboard
+                </a>
+            </li>
+            {% if request.user.is_authenticated and request.user.is_staff or request.user.is_superuser %}
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <div class="navbar-heading">Cities and Attractions</div>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pages:cities_dashboard' %}">
+                        <i class="bi bi-1-circle nav-icon icon-xs me-2"></i>
+                        Cities
+                    </a>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pages:attractions_dashboard' %}">
+                        <i class="bi bi-2-circle nav-icon icon-xs me-2"></i>
+                        Attractions
+                    </a>
+                </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <div class="navbar-heading">Reviews and Wishlist</div>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{% url 'pages:reviews_dashboard' %}">
+                        <i class="bi bi-stars nav-icon icon-xs me-2">
+                        </i> Reviews
+                    </a>
+                </li>
+                {% if request.user.is_superuser or request.user.is_staff is False %}
+                    <li class="nav-item">
+                        <a class="nav-link has-arrow" href="{% url 'pages:wishlist_dashboard' %}">
+                            <i class="bi bi-heart nav-icon icon-xs me-2">
+                            </i> Wishlist
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <div class="navbar-heading">Profile and Settings</div>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{% url 'registration:update_profile' %}">
+                        <i class="bi bi-person-circle nav-icon icon-xs me-2">
+                        </i> Profile
+                    </a>
+                </li>
+                {% if request.user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link has-arrow" href="">
+                            <i class="bi bi-people nav-icon icon-xs me-2">
+                            </i> Users
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</nav>

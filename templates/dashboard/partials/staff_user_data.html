@@ -1,0 +1,79 @@
+<div class="col-xl-4 col-lg-4 col-md-12 col-12 mt-6">
+    <!-- card -->
+    <div class="card ">
+        <!-- card body -->
+        <div class="card-body">
+            <!-- heading -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h4 class="mb-0">Cities</h4>
+                </div>
+                <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
+                    <i class="bi bi-card-list fs-4"></i>
+                </div>
+            </div>
+            <!-- project number -->
+            <div>
+                <h1 class="fw-bold">{{ cities|length }}</h1>
+                <p class="mb-0">
+                    <span class="text-dark me-2">{{ cities.cities_active|length }}</span>
+                    Published
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-4 col-lg-4 col-md-12 col-12 mt-6">
+    <!-- card -->
+    <div class="card ">
+        <!-- card body -->
+        <div class="card-body">
+            <!-- heading -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h4 class="mb-0">Attractions</h4>
+                </div>
+                <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
+                    <i class="bi bi-card-checklist fs-4"></i>
+                </div>
+            </div>
+            <!-- project number -->
+            <div>
+                <h1 class="fw-bold">{{ attractions|length }}</h1>
+                <p class="mb-0">
+                    <span class="text-dark me-2">
+                        {{ attractions.attractions_active|length }}
+                    </span>
+                    Published
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-4 col-lg-4 col-md-12 col-12 mt-6">
+    <!-- card -->
+    <div class="card ">
+        <!-- card body -->
+        <div class="card-body">
+            <!-- heading -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h4 class="mb-0">Reviews</h4>
+                </div>
+                <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
+                    <i class="bi bi-list-stars fs-4"></i>
+                </div>
+            </div>
+            <!-- project number -->
+            <div>
+                <h1 class="fw-bold">{{ sa_reviews|length }}</h1>
+                <p class="mb-0">
+                    <span class="text-dark me-2">
+                        {{ sa_reviews.reviews_waiting|length }}
+                    </span>
+                    Waiting
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

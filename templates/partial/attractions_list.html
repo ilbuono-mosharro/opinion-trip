@@ -1,0 +1,30 @@
+{% load static %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 align-items-stretch g-4 {% if atractions|length == 0 %}justify-content-center{% endif %}">
+    {% for attraction in atractions %}
+        <div class="col">
+            <div class="card border-0">
+                <a href="{{ attraction.get_absolute_url }}" class="text-decoration-none">
+                    {% if attraction.copertina %}
+                        <img src="{{ attraction.copertina.url }}" class="card-img-top" alt="..." height="250">
+                    {% else %}
+                        <img src="{% static 'img/no_image.svg' %}" class="card-img-top" alt="..." height="250">
+                    {% endif %}
+                </a>
+                <div class="position-absolute top-0 end-0 p-2">
+                    {% include 'partial/wishlist_form.html' %}
+                </div>
+                <div class="card-body c-body-style">
+                    <a href="{{ attraction.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <h3 class="card-title mb-0 h5">{{ attraction.name }}</h3>
+                    </a>
+                    <ul class="list-unstyled list-inline h-8">
+                     {% include 'partial/review_star_li_attraction.html' %}
+                    </ul>
+                    <p class="small">{{ attraction.city }}</p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        {% include 'partial/no_result_found.html' %}
+    {% endfor %}
+</div>

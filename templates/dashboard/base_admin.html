@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'dashboard/partials/head.html' %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+</head>
+<body class="bg-light">
+<div id="db-wrapper">
+    <!-- navbar vertical -->
+    {% include 'dashboard/partials/navbar-vertical.html' %}
+    <!-- Page content -->
+    <div id="page-content">
+        {% include 'dashboard/partials/header.html' %}
+        <!-- Container fluid -->
+        <div class="bg-primary pt-10 pb-21"></div>
+        <div class="container-fluid mt-n22 px-6">
+            {% include 'partial/messagges.html' %}
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<!-- Scripts -->
+{% include 'dashboard/partials/scripts.html' %}
+{% block javascript %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}cities{% endblock %}
+{% block description %}cities{% endblock %}
+{% block keywords %}cities{% endblock %}
+{% block ogtitle %}cities{% endblock %}
+{% block ogdescription %}cities{% endblock %}
+
+{% block content %}
+    <section id="cities" class="py-3 mb-5">
+        <h1 class="h3 fw-bold">Where to go, right now</h1>
+        <p>Spots at the top of travelers’ must-go lists</p>
+        {% include 'partial/cities_list.html' %}
+        {% include 'partial/pagination.html' with page_obj=cities %}
+    </section>
+{% endblock %}

@@ -1,0 +1,14 @@
+<form action="{% url 'places:attraction_wishlist' %}" method="post" class="favorite-form"
+      id="{{ attraction.id }}">
+    {% csrf_token %}
+    <label for="{{ attraction.id }}" class="invisible">
+        <input type="text" name="id" value="{{ attraction.id }}" id="{{ attraction.id }}" hidden>
+    </label>
+    <button class="mb-0 btn btn-light rounded-circle" type="submit">
+        {% if request.user in attraction.users_wishlist.all %}
+            <i class="bi bi-heart-fill fs-5 text-danger" id="heart-{{ attraction.id }}"></i>
+        {% else %}
+            <i class="bi bi-heart fs-5" id="heart-{{ attraction.id }}"></i>
+        {% endif %}
+    </button>
+</form>

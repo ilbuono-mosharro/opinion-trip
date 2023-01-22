@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}results{% endblock %}
+{% block description %}results{% endblock %}
+{% block keywords %}results{% endblock %}
+{% block ogtitle %}results{% endblock %}
+{% block ogdescription %}results{% endblock %}
+{% block content %}
+    {% if request.GET.type_search == "1" %}
+        <section class="list-place py-3 mb-5">
+            <h1 class="h3">Where to go, right now</h1>
+            <p>Spots at the top of travelers’ must-go lists</p>
+            {% include 'partial/cities_list.html' %}
+            {% include 'partial/pagination.html' with page_obj=cities %}
+        </section>
+    {% elif request.GET.type_search == "2" %}
+        <section class="third-s py-3 mb-5">
+            <h1 class="h3">Top Attractions</h1>
+            <p>Book these experiences for a close-up look</p>
+            {% include 'partial/attractions_list.html' %}
+            {% include 'partial/pagination.html' with page_obj=atractions %}
+        </section>
+    {% else %}
+        {% include 'partial/no_result_found.html' %}
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/wishlist.js' %}"></script>
+{% endblock %}

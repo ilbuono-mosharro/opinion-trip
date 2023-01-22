@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}review_report{% endblock %}
+{% block description %}review_report{% endblock %}
+{% block keywords %}review_report{% endblock %}
+{% block ogtitle %}review_report{% endblock %}
+{% block ogdescription %}review_report{% endblock %}
+
+{% block content %}
+    <section id="review_report">
+        <div class="row py-4">
+            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-12 mb-5">
+                <div class="d-flex mb-5">
+                    <div class="flex-shrink-0">
+                        {% if review.attraction.copertina %}
+                            <img src="{{ review.attraction.copertina.url }}" alt="..." width="200" height="150">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h1 class="h3 lh-1 mb-3">{{ review.attraction.name }}</h1>
+                        <p>Rruga fitil pilko 1 {{ review.attraction.city }}</p>
+                    </div>
+                </div>
+                <form action="{% url 'reviews:report_this_review' review.id %}" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{ form.subject }}
+                        {{ form.subject.label_tag }}
+                        {{ form.subject.errors }}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.description }}
+                        {{ form.description.label_tag }}
+                        {{ form.description.errors }}
+                    </div>
+                    <button class="w-100 btn btn-lg btn-teen" type="submit">Send</button>
+                    <hr class="my-4">
+                    <small class="text-muted">I certify that this review is based on my own experience and is my genuine
+                        opinion of this establishment and that I have no personal or business relationship with this
+                        establishment, and have not been offered any incentive or payment originating from the
+                        establishment to write this review. I understand that Website has a zero-tolerance policy on
+                        fake reviews.</small>
+                </form>
+            </div>
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-12 border-start">
+                <h5 class="text-center">Report this review</h5>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 border-0"
+                       aria-current="true">
+                        <img src="
+                                {% if review.user.avatar %}{{ review.user.avatar.url }}{% else %}{% static 'dashboard/img/avatar/avatar-1.jpg' %}{% endif %}"
+                             alt="twbs"
+                             width="32" height="32" class="rounded-circle flex-shrink-0">
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                            <div>
+                                <h6 class="mb-0">{{ review.subject }}</h6>
+                                <p class="mb-0 opacity-75">{{ review.review }}</p>
+                            </div>
+                            <small class="text-nowrap">
+                                {% include 'partial/review_rating.html' %}
+                            </small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

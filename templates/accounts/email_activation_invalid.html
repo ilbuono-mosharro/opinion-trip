@@ -1,0 +1,26 @@
+{% extends 'dashboard/base_registration.html' %}
+{% block title %}link invalid{% endblock %}
+{% block description %}link invalid{% endblock %}
+{% block keywords %}link invalid{% endblock %}
+{% block ogtitle %}link invalid{% endblock %}
+{% block ogdescription %}link invalid{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <i class="bi bi-emoji-frown display-1"></i>
+    </div>
+    <h5 class="text-center p-4">
+        The confirmation link is invalid, probably because it has already been used.
+    </h5>
+    <div class="d-md-flex justify-content-between mt-4">
+        <div class="mb-2 mb-md-0">
+            <a href="{% url 'pages:home' %}" class="text-inherit fs-5">
+                <i class="bi bi-arrow-left"></i> View Website
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'login' %}" class="text-inherit fs-5">
+                Already member? Login <i class="bi bi-box-arrow-in-right"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'dashboard/base_admin.html' %}
+{% load static %}
+{% block content %}
+    <div class="row align-items-center mt-5">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+            <div class="bg-white rounded-bottom smooth-shadow-sm">
+                <div class="d-flex align-items-center justify-content-between pt-4 pb-6 px-4">
+                    <div class="d-flex align-items-center">
+                        <!-- avatar -->
+                        <div class="avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10">
+                            <img src="{% if request.user.avatar %}{{ request.user.avatar.url }}{% else %}{% static 'dashboard/img/avatar/avatar-1.jpg' %}{% endif %}"
+                                 class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="">
+                            <div class="position-absolute top-0 right-0 me-2">
+                                <img src="{% static 'dashboard/img/svg/checked-mark.svg' %}" alt="" height="30"
+                                     width="30">
+                            </div>
+                        </div>
+                        <!-- text -->
+                        <div class="lh-1">
+                            <h2 class="mb-0">{{ request.user.get_full_name }}</h2>
+                            <p class="mb-0 d-block">@{{ request.user.username }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- nav -->
+                <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <div class="nav-link active">Overview</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="py-6">
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                <!-- card -->
+                <div class="card">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <!-- card title -->
+                        <h4 class="card-title">Update Profile</h4>
+                        <form enctype="multipart/form-data" method="post"
+                              action="{% url 'registration:update_profile' %}" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3">
+                                {{ form.first_name }}
+                                {{ form.first_name.label_tag }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form.last_name }}
+                                {{ form.last_name.label_tag }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email_id"
+                                       placeholder="Email (you cannot change the email)"
+                                       value="{{ request.user.email }}" disabled>
+                                <label for="email_id">Email (you cannot change the email)</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form.age }}
+                                {{ form.age.label_tag }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form.gender }}
+                                {{ form.gender.label_tag }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form.city }}
+                                {{ form.city.label_tag }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form.contry }}
+                                {{ form.contry.label_tag }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.avatar.label_tag }}
+                                {{ form.avatar }}
+                            </div>
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
+                <!-- card -->
+                <div class="card mb-6">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <div class="mb-6">
+                            <h4 class="mb-1">Change Password</h4>
+                        </div>
+                        <div>
+                            <!-- text -->
+                            <p>Make your account more secure.Use unique and secure passwords.</p>
+                            <a href="{% url 'password_change' %}" class="btn btn-danger">Change Password</a>
+                            <p class="small mb-0 mt-3">Feel free to contact with any
+                                <a href="#">dashui@example.com</a> questions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- card -->
+                <div class="card mb-6">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <div class="mb-6">
+                            <h4 class="mb-1">Danger Zone </h4>
+                        </div>
+                        <div>
+                            <!-- text -->
+                            <p>Delete any and all content you have, such as articles, comments, your reading list or
+                                chat messages. Allow your username to become available to anyone.
+                            </p>
+                            {% url 'registration:delete_user' as delete_user %}
+                            {% include 'dashboard/partials/delete_modal.html' with button="Delete Account" title="Are you sure you want to deactivate your account?" body="A deactivated account can be activated within 30 days from the deactivation by contacting us through the address of email." url=delete_user modalid=request.user.id %}
+                            <p class="small mb-0 mt-3">Feel free to contact with any <a href="#">dashui@example.com</a>
+                                questions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

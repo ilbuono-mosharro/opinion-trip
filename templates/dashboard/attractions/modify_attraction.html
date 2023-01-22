@@ -1,0 +1,64 @@
+{% extends 'dashboard/base_admin.html' %}
+
+{% block content %}
+    <div class="row mt-6">
+        <div class="col-md-12 col-12">
+            <div class="card">
+                <!-- card header  -->
+                <div class="card-header bg-white  py-4">
+                    <h4 class="mb-0">Update {{ attraction.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'places:modify_attraction' attraction.id %}" method="post"
+                          enctype="multipart/form-data" autocomplete="off">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            {{ form.city }}
+                            {{ form.city.label_tag }}
+                            {{ form.city.errors }}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.name }}
+                            {{ form.name.label_tag }}
+                            {{ form.name.errors }}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.adress }}
+                            {{ form.adress.label_tag }}
+                            {{ form.adress.errors }}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.cap }}
+                            {{ form.cap.label_tag }}
+                            {{ form.cap.errors }}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.title }}
+                            {{ form.title.label_tag }}
+                            {{ form.title.errors }}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.description }}
+                            {{ form.description.label_tag }}
+                            {{ form.description.errors }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.copertina.label_tag }}
+                            {{ form.copertina }}
+                            <a href="{{ attraction.copertina.url }}" class="text-decoration-none">
+                                Currently: {{ attraction.copertina.url }}
+                            </a>
+                            {{ form.copertina.errors }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.is_active.label_tag }}
+                            {{ form.is_active }}
+                            {{ form.is_active.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

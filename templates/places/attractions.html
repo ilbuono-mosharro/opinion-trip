@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}attractions{% endblock %}
+{% block description %}attractions{% endblock %}
+{% block keywords %}attractions{% endblock %}
+{% block ogtitle %}attractions{% endblock %}
+{% block ogdescription %}attractions{% endblock %}
+{% block content %}
+    <section id="attractions" class="py-3 mb-5">
+        <h1 class="h3">Attractions</h1>
+        <p>Book these experiences for a close-up look</p>
+        {% include 'partial/attractions_list.html' %}
+        {% include 'partial/pagination.html' with page_obj=atractions %}
+    </section>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/wishlist.js' %}"></script>
+{% endblock %}

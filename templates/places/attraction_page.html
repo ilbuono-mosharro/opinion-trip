@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}attration_detail{% endblock %}
+{% block description %}attration_detail{% endblock %}
+{% block keywords %}attration_detail{% endblock %}
+{% block ogtitle %}attration_detail{% endblock %}
+{% block ogdescription %}attration_detail{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle-min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/swipper-attraction.css' %}"/>
+{% endblock %}
+{% block content %}
+    <section id="attration_detail" class="py-3">
+        <h1>{{ attraction.name }}</h1>
+        <ul class="list-unstyled list-inline">
+            {% include 'partial/review_star_li_attraction.html' %}
+            <li class="list-inline-item">
+                #1 of {{ attraction.city.get_number_attractions }} things to do in {{ attraction.city.name }}
+            </li>
+        </ul>
+        <div class="lightbox">
+            <div class="col-xxl-8">
+                <div class="row flex-lg-row-reverse g-5 py-5">
+                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                             class="swiper mySwiper2">
+                            <div class="swiper-wrapper">
+                                {% for image in images %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ image.image.url }}" alt=""/>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        <div thumbsSlider="" class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                {% for image in images %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ image.image.url }}" alt=""/>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                        <h2 class="h1 fw-bold lh-1">What people are saying</h2>
+                        <p class="lead">{{ attraction.description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="d-flex flex-column bd-highlight mb-5">
+                    <div class="bd-highlight">
+                            <a href="{% url 'reviews:attraction_review' attraction.slug attraction.id %}"
+                               class="btn btn-teen btn-lg rounded-pill">Write a review</a>
+                    </div>
+                </div>
+                <h2 class="border-bottom border-3 mb-4">Reviews</h2>
+                <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4 mb-5">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item h5">{{ attraction.review_avg|floatformat }}</li>
+                        {% include 'partial/review_star_li_attraction.html' %}
+                    </ul>
+                    <div class="row align-items-center">
+                        {% include 'partial/review_data.html' %}
+                    </div>
+                </div>
+                <div class="col-12 col-xxl-8 col-xl-8 col-lg-8 col-md-8">
+                    {% for review in reviews %}
+                        <div class="d-flex">
+                            <img src="{% if review.user.avatar %}{{ review.user.avatar.url }}{% else %}{% static 'dashboard/img/avatar/avatar-1.jpg' %}{% endif %}"
+                                 class="flex-shrink-0 me-3 rounded mx-auto d-block rounded-circle" alt="..."
+                                 width="50" height="50">
+                            <div class="w-100">
+                                <h5 class="h-25">{{ review.user.get_full_name }}</h5>
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item small text-muted">{{ review.user.city }}, {{ review.user.contry }}</li>
+                                    <li class="list-inline-item small text-muted">
+                                        <i class="bi bi-dot"></i> {{ review.user.user_reviews_number }}
+                                        contributions
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <ul class="list-unstyled list-inline">
+                                   {% if review.user != request.user %}
+                                       <li class="list-inline-item">
+                                           <form method="post" action="{% url 'reviews:add_review_vote' review.id %}">
+                                               {% csrf_token %}
+                                               <button type="submit" class="btn btn-light border-0 p-0">
+                                                   <i class="bi bi-hand-thumbs-up{% if request.user in review.users_vote.all %}-fill text-success{% endif %}"></i> {{ review.total_vote }}
+                                               </button>
+                                           </form>
+                                       </li>
+                                       <li class="list-inline-item">
+                                           <a href="{% url 'reviews:report_this_review' review.id %}"
+                                              class="text-decoration-none">
+                                               <i class="bi bi-flag text-dark"></i>
+                                           </a>
+                                       </li>
+                                   {% else %}
+                                       <li class="list-inline-item">
+                                           <a href="{% url 'reviews:modify_review' review.id %}" class="btn btn-primary btn-sm">
+                                               <i class="bi bi-pencil"></i>
+                                           </a>
+                                       </li>
+                                   {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column mb-5 border-bottom">
+                            <div class="bd-highlight">
+                                {% include 'partial/review_rating.html' %}
+                            </div>
+                            <div class="h5 bd-highlight">{{ review.subject }}</div>
+                            <div class="bd-highlight">{{ review.review }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/swiper-bundle.js' %}"></script>
+    <script src="{% static 'js/swiper-attraction.js' %}"></script>
+{% endblock %}

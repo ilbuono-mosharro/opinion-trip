@@ -1,0 +1,140 @@
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 4px;
+}
+
+.border-radius-15 {
+    border-radius: 1.5rem
+}
+
+.m-e-2 {
+    margin-right: -0.2rem !important;
+}
+
+.h-8 {
+    height: 8px;
+}
+
+.c-body-style {
+    padding: .5rem 0;
+}
+
+body {
+    min-height: 57rem;
+    padding-top: 4.5rem;
+}
+
+h1, h3 {
+    font-family: 'Fredoka One', cursive;
+}
+
+h2, h4, h5 {
+    font-family: 'Itim', cursive;
+}
+
+h6 {
+    font-family: 'Abhaya Libre', serif;
+}
+
+.color-green-bg {
+    background-color: #00aa6c;
+}
+
+.color-green {
+    color: #00aa6c;
+}
+
+.menu-hover {
+    font-family: 'Itim', cursive;
+}
+
+.font-text-itim {
+    font-family: 'Itim', cursive;
+}
+
+.menu-hover:hover {
+    color: #EB0053 !important;
+}
+
+.first-s {
+    background-image: url("/static/img/trip1.svg");
+    background-repeat: no-repeat;
+    background-position: 330px;
+    right: 0;
+    height: 500px;
+    position: relative;
+    background-size: 100% 100%;
+}
+
+@media (max-width: 767.98px) {
+    .first-s {
+        background-position: 100px;
+        height: 245px;
+    }
+}
+@media (max-width: 991.98px) {
+    .first-s {
+        background-position: 123px;
+        height: 260px;
+    }
+    .city-images {
+        width: auto;
+        height: auto;
+    }
+}
+
+.form-control:focus {
+    outline: 0 !important;
+    border-color: initial;
+    box-shadow: none;
+}
+
+.form-select:focus {
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+}
+
+.rate {
+    color: #00aa6c !important;
+    direction: rtl;
+    display: inline-block;
+}
+
+.rate input[type=radio] {
+    display: none
+}
+
+.rate label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.rate:hover, .rate label:hover ~ label, .rate input[type=radio]:checked ~ label {
+    color: #00aa6c;
+}
+
+.btn-teen {
+    color: #fff;
+    background-color: #F50057;
+    border-color: #F50057;
+}
+
+.btn-teen:hover {
+    color: #fff;
+    background-color: #F50057;
+    border-color: #F50057;
+}
+
+.page-item.active .page-link {
+    background-color: #F50057;
+    border-color: #F50057;
+}
+.page-link {
+    color: black;
+}

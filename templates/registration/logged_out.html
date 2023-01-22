@@ -1,0 +1,21 @@
+{% extends 'dashboard/base_registration.html' %}
+{% block title %}logout{% endblock %}
+{% block description %}logout{% endblock %}
+{% block keywords %}logout{% endblock %}
+{% block ogtitle %}logout{% endblock %}
+{% block ogdescription %}logout{% endblock %}
+{% block content %}
+    <p>Thank you for spending some quality time with the website today.</p>
+    <div class="d-flex justify-content-between mb-5">
+        <div>
+            <a href="{% url 'pages:home' %}" class="text-inherit fs-5">
+                <i class="bi bi-arrow-left"></i> View Website
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'login' %}" class="text-inherit fs-5">
+                Login <i class="bi bi-box-arrow-in-right"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}
