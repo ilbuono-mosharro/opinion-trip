@@ -17,7 +17,9 @@ Key Features
 
 7 . Search
 
-8 . and many others
+8 . Customized Dashboard for Users And Staff
+
+9 . and many others
 
 Technologies Used:
 
@@ -46,3 +48,15 @@ python manage.py createsuperuser (enter username, email, password)
 python django_web_app/manage.py runserver
 
 In your web browser enter the address : http://localhost:8000 or http://127.0.0.1:8000/
+
+Screenshots:
+
+![My Image](screenshot/home.png)
+
+![My Image](screenshot/cities.png)
+
+![My Image](screenshot/attractions.png)
+
+![My Image](screenshot/dashboard.png)
+
+![My Image](screenshot/dashboard1.png)
