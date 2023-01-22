@@ -5,10 +5,6 @@
 {% block keywords %}attration_detail{% endblock %}
 {% block ogtitle %}attration_detail{% endblock %}
 {% block ogdescription %}attration_detail{% endblock %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/swiper-bundle-min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/swipper-attraction.css' %}"/>
-{% endblock %}
 {% block content %}
     <section id="attration_detail" class="py-3">
         <h1>{{ attraction.name }}</h1>
@@ -21,27 +17,36 @@
         <div class="lightbox">
             <div class="col-xxl-8">
                 <div class="row flex-lg-row-reverse g-5 py-5">
-                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                             class="swiper mySwiper2">
-                            <div class="swiper-wrapper">
+                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6 mb-5 mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0">
+                        <div id="carouselExampleIndicators" class="carousel slide mb-5" data-bs-ride="carousel">
+                            <div class="carousel-indicators mbuttom-2">
                                 {% for image in images %}
-                                    <div class="swiper-slide">
-                                        <img src="{{ image.image.url }}" alt=""/>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ forloop.counter0 }}"
+                                            class="w100-px {% if forloop.counter0 == 0 %}active{% endif %}"
+                                            {% if forloop.counter0 == 0 %}aria-current="true"{% endif %}
+                                            aria-label="Slide {{ forloop.counter0 }}">
+                                        <img src="{{ image.image.url }}" class="d-block w-100" alt="...">
+                                    </button>
+                                {% endfor %}
+                            </div>
+                            <div class="carousel-inner">
+                                {% for image in images %}
+                                    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                        <img src="{{ image.image.url }}" class="d-block w-100" alt="...">
                                     </div>
                                 {% endfor %}
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div thumbsSlider="" class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                                {% for image in images %}
-                                    <div class="swiper-slide">
-                                        <img src="{{ image.image.url }}" alt=""/>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6">
@@ -53,8 +58,8 @@
             <div class="row mb-5">
                 <div class="d-flex flex-column bd-highlight mb-5">
                     <div class="bd-highlight">
-                            <a href="{% url 'reviews:attraction_review' attraction.slug attraction.id %}"
-                               class="btn btn-teen btn-lg rounded-pill">Write a review</a>
+                        <a href="{% url 'reviews:attraction_review' attraction.slug attraction.id %}"
+                           class="btn btn-teen btn-lg rounded-pill">Write a review</a>
                     </div>
                 </div>
                 <h2 class="border-bottom border-3 mb-4">Reviews</h2>
@@ -85,28 +90,29 @@
                             </div>
                             <div class="flex-shrink-0">
                                 <ul class="list-unstyled list-inline">
-                                   {% if review.user != request.user %}
-                                       <li class="list-inline-item">
-                                           <form method="post" action="{% url 'reviews:add_review_vote' review.id %}">
-                                               {% csrf_token %}
-                                               <button type="submit" class="btn btn-light border-0 p-0">
-                                                   <i class="bi bi-hand-thumbs-up{% if request.user in review.users_vote.all %}-fill text-success{% endif %}"></i> {{ review.total_vote }}
-                                               </button>
-                                           </form>
-                                       </li>
-                                       <li class="list-inline-item">
-                                           <a href="{% url 'reviews:report_this_review' review.id %}"
-                                              class="text-decoration-none">
-                                               <i class="bi bi-flag text-dark"></i>
-                                           </a>
-                                       </li>
-                                   {% else %}
-                                       <li class="list-inline-item">
-                                           <a href="{% url 'reviews:modify_review' review.id %}" class="btn btn-primary btn-sm">
-                                               <i class="bi bi-pencil"></i>
-                                           </a>
-                                       </li>
-                                   {% endif %}
+                                    {% if review.user != request.user %}
+                                        <li class="list-inline-item">
+                                            <form method="post" action="{% url 'reviews:add_review_vote' review.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-light border-0 p-0">
+                                                    <i class="bi bi-hand-thumbs-up{% if request.user in review.users_vote.all %}-fill text-success{% endif %}"></i> {{ review.total_vote }}
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="{% url 'reviews:report_this_review' review.id %}"
+                                               class="text-decoration-none">
+                                                <i class="bi bi-flag text-dark"></i>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="list-inline-item">
+                                            <a href="{% url 'reviews:modify_review' review.id %}"
+                                               class="btn btn-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -122,8 +128,4 @@
             </div>
         </div>
     </section>
-{% endblock %}
-{% block javascript %}
-    <script src="{% static 'js/swiper-bundle.js' %}"></script>
-    <script src="{% static 'js/swiper-attraction.js' %}"></script>
 {% endblock %}

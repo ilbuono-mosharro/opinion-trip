@@ -138,3 +138,17 @@ h6 {
 .page-link {
     color: black;
 }
+
+.button-carousel {
+    background: #41464b;
+    width: 2%;
+    top: 100px;
+    bottom: 100px;
+}
+
+.mbuttom-2 {
+    margin-bottom: -2rem;
+}
+.w100-px {
+    width: 100px !important;
+}
