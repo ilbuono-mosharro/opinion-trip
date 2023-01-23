@@ -18,9 +18,9 @@ class City(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_city')
     name = models.CharField(max_length=150)
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, unique=True)
     description = models.TextField(max_length=900)
-    slug = models.SlugField(max_length=200, validators=[validate_slug], unique=True)
+    slug = models.SlugField(max_length=200, validators=[validate_slug])
     is_active = models.BooleanField(default=False)
     copertina = models.ImageField(upload_to=user_directory_path, validators=[
         validate_image_file_extension, FileExtensionValidator(['JPEG', 'JPG', 'PNG']), validate_file_size
