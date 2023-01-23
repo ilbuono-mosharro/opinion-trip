@@ -3,7 +3,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-
+from django.forms import Select, TextInput, NumberInput, FileInput
 from .models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.core.exceptions import ValidationError
@@ -95,13 +95,13 @@ class ModifyProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'age', 'gender', 'city', 'contry', 'avatar')
-        widgets = {'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-                   'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-                   'age': forms.NumberInput(attrs={'class': 'form-control'}),
-                   'gender': forms.Select(attrs={'class': 'form-select'}),
-                   'city': forms.TextInput(attrs={'class': 'form-control'}),
-                   'contry': forms.Select(attrs={'class': 'form-control'}),
-                   'avatar': forms.FileInput(attrs={'class': 'form-control', 'accept': '.jpg, .jpeg, .png'}),
+        widgets = {'first_name': TextInput(attrs={'class': 'form-control'}),
+                   'last_name': TextInput(attrs={'class': 'form-control'}),
+                   'age': NumberInput(attrs={'class': 'form-control'}),
+                   'gender': Select(attrs={'class': 'form-select'}),
+                   'city': TextInput(attrs={'class': 'form-control'}),
+                   'contry': Select(attrs={'class': 'form-control'}),
+                   'avatar': FileInput(attrs={'class': 'form-control', 'accept': '.jpg, .jpeg, .png'}),
                    }
 
     def clean_first_name(self):
